@@ -13,6 +13,12 @@ public abstract class AbstractGenerator<T> implements Generator<T> {
     public Generator<List<T>> list() {
         return new ListOfGenerator<T>(this);
     }
+    @Override
+    public Generator<List<T>> list(int minLength, int maxLength) {
+        final ListOfGenerator<T> listOfGenerator = new ListOfGenerator<T>(this);
+        listOfGenerator.setLengthRange(minLength, maxLength);
+        return listOfGenerator;
+    }
 
     @Override
     public Generator<List<T>> nonEmptyList() {
