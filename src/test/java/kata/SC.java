@@ -115,14 +115,6 @@ public class SC {
         }
     }
 
-    private String mkString(List<Integer> negatives) {
-        StringBuilder sb = new StringBuilder();
-        for (int negative : negatives) {
-            sb.append(',').append(negative);
-        }
-        return sb.substring(1);
-    }
-
     private int parseNUMBER(List<Integer> negatives) throws ParseException {
         if (lexer.head() == '-') {
             int result = parseNEGATIVE_NUMBER();
@@ -186,6 +178,14 @@ public class SC {
         } else {
             throw lexer.parseException("Expected a separator");
         }
+    }
+
+    private String mkString(List<Integer> negatives) {
+        StringBuilder sb = new StringBuilder();
+        for (int negative : negatives) {
+            sb.append(',').append(negative);
+        }
+        return sb.substring(1);
     }
 
     private boolean isSEPARATOR(char ch) {
