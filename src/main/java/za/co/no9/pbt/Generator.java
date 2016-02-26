@@ -10,6 +10,8 @@ public interface Generator<T> {
 
     Generator<List<T>> list();
 
+    Generator<List<T>> list(int minLength, int maxLength);
+
     Generator<List<T>> nonEmptyList();
 
     Generator<T> filter(Predicate<T> predicate);
