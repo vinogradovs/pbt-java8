@@ -6,7 +6,7 @@ public class ShortGenerator extends AbstractGenerator<Short> {
     private final short min;
     private final short max;
 
-    ShortGenerator(short min, short max) {
+    private ShortGenerator(short min, short max) {
         this.min = min;
         this.max = max;
     }

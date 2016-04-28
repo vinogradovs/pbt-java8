@@ -15,7 +15,7 @@ public class ListOfGeneratorTest {
 
     @Test
     public void should_return_lists_within_limits() {
-        ListOfGenerator<Integer> listOfNumbers = new ListOfGenerator<>(new IntegerGenerator(MINIMUM_INTEGER, MAXIMUM_INTEGER));
+        ListOfGenerator<Integer> listOfNumbers = new ListOfGenerator<>(IntegerGenerator.from(MINIMUM_INTEGER, MAXIMUM_INTEGER));
         listOfNumbers.setLengthRange(MINIMUM_LENGTH, MAXIMUM_LENGTH);
 
         final int ranges[] = new int[2];

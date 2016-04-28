@@ -7,14 +7,14 @@ import java.util.function.Supplier;
 
 public class ListOfGenerator<T> extends AbstractGenerator<List<T>> {
     private final Generator<T> generator;
-    private Generator<Integer> lengthGenerator = new IntegerGenerator(0, 10);
+    private Generator<Integer> lengthGenerator = IntegerGenerator.from(0, 10);
 
     public ListOfGenerator(Generator<T> generator) {
         this.generator = generator;
     }
 
     public void setLengthRange(int minLength, int maxLength) {
-        lengthGenerator = new IntegerGenerator(minLength, maxLength);
+        lengthGenerator = IntegerGenerator.from(minLength, maxLength);
     }
 
     @Override

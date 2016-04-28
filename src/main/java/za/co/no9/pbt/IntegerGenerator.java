@@ -6,7 +6,7 @@ public class IntegerGenerator extends AbstractGenerator<Integer> {
     private final int min;
     private final int max;
 
-    IntegerGenerator(int min, int max) {
+    private IntegerGenerator(int min, int max) {
         this.min = min;
         this.max = max;
     }

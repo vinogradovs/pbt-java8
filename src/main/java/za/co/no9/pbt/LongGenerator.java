@@ -6,7 +6,7 @@ public class LongGenerator extends AbstractGenerator<Long> {
     private final long min;
     private final long max;
 
-    LongGenerator(long min, long max) {
+    private LongGenerator(long min, long max) {
         this.min = min;
         this.max = max;
     }
