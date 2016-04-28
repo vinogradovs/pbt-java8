@@ -1,0 +1,29 @@
+package za.co.no9.pbt;
+
+import java.util.concurrent.ThreadLocalRandom;
+
+public class LongGenerator extends AbstractGenerator<Long> {
+    private final long min;
+    private final long max;
+
+    LongGenerator(long min, long max) {
+        this.min = min;
+        this.max = max;
+    }
+
+    public static Generator<Long> from() {
+        return new LongGenerator(Long.MIN_VALUE, Long.MAX_VALUE - 1);
+    }
+
+    public static Generator<Long> from(long min, long max) {
+        if (max == Long.MAX_VALUE) {
+            throw new IllegalArgumentException("Unable to support max value of Long.MAX_VALUE");
+        }
+        return new LongGenerator(min, max);
+    }
+
+    @Override
+    public Long next() {
+        return min < max ? ThreadLocalRandom.current().nextLong(min, max + 1) : min;
+    }
+}
