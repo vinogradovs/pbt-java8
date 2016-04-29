@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 public class LongGeneratorTest {
     @Test
-    public void given_a_fixed_width_list_of_generator_then_the_lists_should_be_of_the_prescribed_length() throws Exception {
+    public void given_a_fixed_width_list_of_longs_then_the_lists_should_be_of_the_prescribed_length() throws Exception {
         Gen.forAll(LongGenerator.from(-10L, 10L).list(10, 10), l -> {
             l.stream().forEach(n ->
                     assertTrue(n >= -10L && n <= 10L));
