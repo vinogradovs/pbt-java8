@@ -1,6 +1,7 @@
 package za.co.no9.pbt;
 
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 public interface Generator<T> {
@@ -13,6 +14,12 @@ public interface Generator<T> {
     Generator<List<T>> list(int minLength, int maxLength);
 
     Generator<List<T>> nonEmptyList();
+
+    Generator<Set<T>> set();
+
+    Generator<Set<T>> set(int minLength, int maxLength);
+
+    Generator<Set<T>> nonEmptySet();
 
     Generator<T> filter(Predicate<T> predicate);
 
