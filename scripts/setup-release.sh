@@ -8,7 +8,7 @@ else
 	git branch $1
 	git checkout $1
 
-	mvn versions:set -DnewVersion=$1
-	mvn clean deploy
+	mvn versions:set -DnewVersion=$1 -Prelease
+	mvn clean deploy -Prelease
 fi
 
