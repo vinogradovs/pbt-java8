@@ -35,12 +35,67 @@ Using the [String Calculator](http://osherove.com/tdd-kata-1/) as a backdrop let
 	import static za.co.no9.pbt.Gen.forAll;
 
     @Test
-    public void given_a_number_should_return_its_value() {
+    public void given_an_integer_should_return_its_value() {
     	Generator<Integer> integers = IntegerGenerator.from(-2000, 2000);
     	
         forAll(integers, n ->
-                assertEquals(normaliseInt(n), add(n.toString())));
+                assertEquals(n, add(n.toString())));
     }
 ```
 
-# Kotlin
+Notes:
+
+* This library is used within a normal jUnit test - there is no need to include any other framework or exotic parent 
+classes.
+* The variable `integers` is a generator that, when the method `next` is invoked on it, will return an `Integer` in the
+range -2000 and 2000.
+* The `forAll` construct accepts one or more generators and a function.  `forAll` then executes the function `za.co.no9.pbt.Gen.ITERATIONS`
+ number of times by invoking this function with values that are supplied by call `next` on each of the generators.  In
+ code the `forAll` method as implemented as
+ 
+ ```java
+     public static <T> void forAll(Generator<T> gen1, Consumer<T> consumer) {
+         for (int i = 0; i < ITERATIONS; i += 1) {
+             consumer.accept(gen1.next());
+         }
+     }
+ ```
+* All of Java's native data types have supported generators - `BooleanGenerator`, `ByteGenerator`, `CharacterGenerator`, 
+`DoubleGenerator`, `FloatGenerator`, `IntegerGenerator`, `LongGenerator` and `ShortGenerator`.
+
+
+## Given a list of integers should return the sum
+
+```java
+	import za.co.no9.pbt.Generator;
+	import za.co.no9.pbt.IntegerGenerator;
+	import static za.co.no9.pbt.Gen.forAll;
+
+    @Test
+    public void given_a_list_of_integers_should_return_its_value() {
+    	Generator<List<Integer>> listOfIntegers = IntegerGenerator.from(-2000, 2000).nonEmptyList();
+    	
+        forAll(listOfIntegers, ns ->
+                assertEquals(
+                	ns.stream().reduce(0, (sum, n) -> sum + n), 
+                	add(ns.stream().map(Object::toString).collect(Collectors.joining(",")))));
+    }
+```
+
+Notes:
+
+* Each generator has a set of methods that can be applied to return a generator collection.  In the example above the
+ variable `listOfIntegers` is a generator that is assembled by calling `nonEmptyList` on the `integers` collection from the 
+ previous example.  In the same way it is possible to create a Set from a generator.
+* A complete set of tests for the kata can be found in the `kata` test package.
+
+
+# Library Dependency
+
+```xml
+	<dependency>
+		<groupId>za.co.no9</groupId>
+		<artifactId>pbt-java8</artifactId>
+		<version>1.0</version>
+	</dependency>
+```
